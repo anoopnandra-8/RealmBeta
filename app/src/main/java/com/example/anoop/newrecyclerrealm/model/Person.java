@@ -13,6 +13,7 @@ public class Person extends RealmObject {
     private String name;
     private int age;
     private String profession;
+    private int subID;
 
     public void setId(long id){
         this.id=id;
@@ -44,5 +45,13 @@ public class Person extends RealmObject {
 
     public String getProfession(){
         return profession;
+    }
+
+    public void setSubID(int subID){
+        this.subID=subID;
+    }
+
+    public int getSubID(){
+        return subID;
     }
 }

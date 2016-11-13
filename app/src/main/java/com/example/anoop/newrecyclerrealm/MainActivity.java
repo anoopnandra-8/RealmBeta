@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 person.setName(name.getText().toString());
                 person.setAge(Integer.parseInt(age.getText().toString()));
                 person.setProfession(profession.getText().toString());
+                person.setSubID(1);
 
                 realm.beginTransaction();
                 realm.copyToRealm(person);
