@@ -18,6 +18,7 @@ import com.example.anoop.newrecyclerrealm.realm.RealmController;
 import java.util.Random;
 
 import io.realm.Realm;
+import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private Realm realm;
     EditText name, age, profession;
     Button saveData, listResults, deleteData;
+    private RealmChangeListener realmChangeListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +45,14 @@ public class MainActivity extends AppCompatActivity {
 
         Log.i("DBStatus", RealmController.with(this).getPerson().toString());
 
-        RealmController.with(this).refresh();
+       // RealmController.with(this).refresh();
+
+        realmChangeListener = new RealmChangeListener() {
+            @Override
+            public void onChange(Object element) {
+                    RealmController.with(MainActivity.this).refresh();
+            }
+        };
 
         activateSave();
         activateListActivity();

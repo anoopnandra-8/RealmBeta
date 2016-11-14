@@ -16,6 +16,7 @@ import com.example.anoop.newrecyclerrealm.realm.RealmController;
 import java.util.ArrayList;
 
 import io.realm.Realm;
+import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
 
 /**
@@ -28,6 +29,7 @@ public class ListDatabaseResults extends AppCompatActivity{
     private Realm realm;
     private LayoutInflater inflater;
     private RecyclerView recyclerView;
+    private RealmChangeListener realmChangeListener;
 
     @Override
     protected void onCreate( Bundle savedInstanceState) {
@@ -39,7 +41,13 @@ public class ListDatabaseResults extends AppCompatActivity{
 
         setUpRecycler();
 
-        RealmController.with(this).refresh();
+        realmChangeListener = new RealmChangeListener() {
+            @Override
+            public void onChange(Object element) {
+                RealmController.with(ListDatabaseResults.this).refresh();
+            }
+        };
+
 
         setUpRealmAdapter(RealmController.with(this).getPerson());
 

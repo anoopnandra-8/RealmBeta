@@ -53,13 +53,13 @@ public class RealmController {
     }
 
     public void refresh(){
-        realm.refresh();
+        realm.waitForChange(); //realm.refresh();
     }
 
     //Clear DB
     public void clearAll(){
         realm.beginTransaction();
-        realm.clear(Person.class);
+        realm.deleteAll(); //realm.clear(Person.class)
         realm.commitTransaction();
     }
 
@@ -73,9 +73,10 @@ public class RealmController {
         return realm.where(Person.class).equalTo("id", id).findFirst();
     }
 
-    public boolean hasPerson(){
-        return !realm.allObjects(Person.class).isEmpty();
-    }
+/*    public boolean hasPerson(){
+        return !realm.where(Person.class).findAll();
+        //return !realm.allObjects(Person.class).isEmpty();
+    }*/
 
     public boolean checkPersonID(long id){
         RealmResults<Person> query = realm.where(Person.class).equalTo("id", id).findAll();

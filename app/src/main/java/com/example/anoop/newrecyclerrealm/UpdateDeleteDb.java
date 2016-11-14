@@ -84,7 +84,8 @@ public class UpdateDeleteDb extends AppCompatActivity {
             public void onClick(View v) {
                 RealmResults<Person> results = realm.where(Person.class).findAll();
                 realm.beginTransaction();
-                results.remove(listPosition);
+             //   results.remove(listPosition); //result.remove(listPosition);
+                results.deleteFromRealm(listPosition);
                 realm.commitTransaction();
 
                 Intent intent = new Intent(UpdateDeleteDb.this, MainActivity.class);
